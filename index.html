@@ -9,14 +9,15 @@
 
 <!-- my css goes here  -->
 <style>
-  /* body{
-      background-image: url("http://www.urwallpapers.com/download/1753/3D/hd_wallpaper_3d_cubes_abstract_backgrounds-1024x600.jpg");
-      background-repeat: no-repeat;
-      background-size: cover;
-  } */
-
+   body{
+       background-image: url("https://lh3.googleusercontent.com/sY0LBi2UBEvl-HATfFAhE2nxMOis_3EVbzKNwRu_JjppLeGllWv1fGIwC7J8FoOCeHU=h1264"); 
+       background-repeat: no-repeat;
+       background-size: cover;
+  } 
+ 
   .clock{
-      border:solid 10px black;
+      border:solid 10px rgb(155, 48, 204);
+      background: white;
       border-radius: 50%;
       height:200px;
       width:200px;
@@ -25,8 +26,6 @@
       padding:2rem;
   }
   .hand{
-      /* border:solid 1px white; */
-      background: black;
       width:50%;
       height:6px;
       position: absolute;
@@ -34,14 +33,23 @@
       transform:translateY(-3px);
       transform-origin: 100%;
       transform:rotate(90deg);
-      
   }
+  
   .clock-face{
       width:100%;
       height:100%;
       position:relative;
   }
   
+  .hand-min{
+    background: rgb(7, 238, 18);
+  }
+  .hand-sec{
+    background: rgb(12, 35, 168);
+  }
+  .hand-hrs{
+    background: red;
+  }
 
 </style>
 
@@ -49,7 +57,7 @@
   <div class="clock">
       <div class="clock-face">
           <div class="hand hand-sec"></div>
-          <div class="hand hnad-min"></div>
+          <div class="hand hand-min"></div>
           <div class="hand hand-hrs"></div>
       </div>
   </div>
@@ -62,15 +70,21 @@
    let hours = document.querySelector('.hand-hrs');
    
    function setTime(){
+       
        date = new Date();
        let second = date.getSeconds();
        let minute = date.getMinutes();
        let hour = date.getHours();
-       let secInDeg =  (second/60)*360;
-       let hrsInDeg =  (hour/60)*360;
-       let minInDeg =  (minute/60)*360;
-       console.log(second);
+
+       let secInDeg =  (second/60)*360 + 90;
+       let hrsInDeg =  (hour/12)*360 + 90;
+       let minInDeg =  (minute/60)*360 + 90;
+
+       console.log(hour,minute,second);
+
        seconds.style.transform = `rotate(${secInDeg}deg)`;
+       minutes.style.transform = `rotate(${minInDeg}deg)`;
+       hours.style.transform = `rotate(${hrsInDeg}deg)`;
    }
    setInterval(setTime, 1000);
 
